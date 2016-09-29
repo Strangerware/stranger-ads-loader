@@ -1,11 +1,14 @@
 "use strict";
 
-class AdsLoader {
-  constructor () {
+const defaults = {};
 
+class AdsLoader {
+
+  constructor (config) {
+    this.config = {...config, ...defaults}
   }
 
-  requestAd() {
+  requestAd(masterAdTag) {
     return Promise.resolve();
   }
 }

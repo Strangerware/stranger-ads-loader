@@ -13,7 +13,7 @@ const config = {
         include: __dirname,
         exclude: /node_modules/,
         query: {
-          presets: ['es2015']
+          presets: ['es2017']
         }
       }
     ]

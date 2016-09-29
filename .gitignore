@@ -3,5 +3,6 @@ dist
 *.log
 .*
 !.gitignore
-!.eslintrc.json
+!.eslintrc
 !.babelrc
+!.nvmrc
