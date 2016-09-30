@@ -4,8 +4,7 @@
   "description": "Isomorphic VAST ADS LOADER",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --compilers js:babel-register --reporter spec './test/**/*.js'",
-    "tdd": "./node_modules/.bin/mocha --compilers js:babel-register --watch --reporter spec './test/**/*.js'",
+    "test": "ava",
     "watch": "./node_modules/.bin/webpack --progress --watch",
     "lint": "eslint src/",
     "lintfix": "eslint src/ --fix"
@@ -24,6 +23,7 @@
   },
   "homepage": "https://github.com/sedaAds/ads-loader#readme",
   "devDependencies": {
+    "ava": "^0.16.0",
     "babel-cli": "^6.16.0",
     "babel-core": "^6.16.0",
     "babel-eslint": "^7.0.0",
@@ -31,10 +31,17 @@
     "babel-preset-es2017": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
     "babel-register": "^6.16.0",
-    "chai": "^3.5.0",
     "eslint": "^3.6.1",
-    "mocha": "^3.1.0",
-    "sinon": "^1.17.6",
     "webpack": "^2.1.0-beta.21"
+  },
+  "babel": {
+    "presets": [
+      "es2017", 
+      "stage-0"
+    ]
+  },
+  "ava": {
+    "require": "babel-register" ,
+    "babel": "inherit"
   }
 }
