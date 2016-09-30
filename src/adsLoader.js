@@ -5,10 +5,11 @@ const defaults = {};
 class AdsLoader {
 
   constructor (config) {
-    this.config = {...config, ...defaults}
+    this.config = {...defaults, ...config}
   }
 
-  requestAd(masterAdTag) {
+  fetch(masterAdTag, options) {
+    //TODO: MAGIC YET TO HAPPEN
     return Promise.resolve();
   }
 }
