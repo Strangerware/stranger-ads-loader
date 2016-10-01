@@ -1,6 +1,14 @@
 import { isVastWrapper, getVastTagUri } from './selectors';
 
+const defaults = { maxChainDepth: 5 };
+
 function vastWrapperChain (fetchAd, config, adChain=[]) {
+  if(adChain.length >= config.maxChainDepth) {
+    const maxChainDepthErr = new Error(`VastWrapperChain 'maxChainDepth' reached`);
+    maxChainDepthErr.adChain = adChain;
+    return Promise.reject(maxChainDepthErr);
+  }
+
   return fetchAd(config.adTag, config)
     .then((vastAdObj) => {
       const newAdChain = [...adChain, vastAdObj];
@@ -14,6 +22,5 @@ function vastWrapperChain (fetchAd, config, adChain=[]) {
     });
 }
 
-export default (fetchAd, config={}) => {
-  return vastWrapperChain(fetchAd, config);
-}
+export default (fetchAd, config={}) => 
+  vastWrapperChain(fetchAd, {...defaults, ...config});
