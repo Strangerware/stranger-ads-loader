@@ -10,10 +10,11 @@ const promisify = (func) => new Promise(
 );
 
 export default function(masterAdTag, config={}) {
+  const parseStrDefaults = { explicitArray: false, normalizeTags: true, normalize: true };
   return fetch(masterAdTag, config)
     .then((res) =>
       promisify((cb) => 
-        parseString(res.text(), cb)
+        parseString(res.text(), parseStrDefaults, cb)
       )
     )
 };
