@@ -4,5 +4,4 @@ dist
 .*
 !.gitignore
 !.eslintrc
-!.babelrc
 !.nvmrc
