@@ -1,12 +1,12 @@
 import test from 'ava';
 import { parseString } from 'xml2js';
-import { isVastWrapper } from '../src/selectors';
+import { isVastWrapper, getVastTagUri } from '../src/selectors';
 
 const vastWrapperObj = { 
   vast: {  
       ad: {  
          wrapper:{  
-            vasttaguri: "http://expample.com"
+            vasttaguri: 'http://expample.com'
          }
       }
    }
@@ -15,7 +15,7 @@ const vastWrapperObj = {
 const nonVastWrapperObj = {  
    vast:{  
       ad:{  
-         inline:""
+         inline: ''
       }
    }
 };
@@ -32,5 +32,13 @@ test(`isVastWrapper must return false otherwise`, t => {
   t.false(isVastWrapper(function() {}));
 });
 
-test.todo('getVastTagUri must return the vastTagUri from the wrapper vastObj');
-test.todo('getVastTagUri must return undefined if vastTagUri can not be found')
+test('getVastTagUri must return the vastTagUri from the wrapper vastObj', t => 
+  t.is(getVastTagUri(vastWrapperObj), 'http://expample.com'));
+
+test('getVastTagUri must return undefined if vastTagUri can not be found', t => {
+  t.is(getVastTagUri(nonVastWrapperObj), undefined);
+  t.is(getVastTagUri(), undefined);
+  t.is(getVastTagUri(null), undefined);
+  t.is(getVastTagUri('nonVastWrapperObj'), undefined);
+  t.is(getVastTagUri(function() {}), undefined);
+});
