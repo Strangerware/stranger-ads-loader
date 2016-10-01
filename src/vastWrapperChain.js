@@ -1,6 +1,5 @@
 import { isVastWrapper, getVastTagUri } from './selectors';
 
-
 function vastWrapperChain (fetchAd, config, adChain=[]) {
   return fetchAd(config.adTag, config)
     .then((vastAdObj) => {
