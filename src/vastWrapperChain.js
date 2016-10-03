@@ -2,14 +2,23 @@ import { isVastWrapper, getVastTagUri } from './selectors';
 
 const defaults = { maxChainDepth: 5 };
 
-function vastWrapperChain (fetchAd, config, adChain=[]) {
-  if(adChain.length >= config.maxChainDepth) {
-    const maxChainDepthErr = new Error(`VastWrapperChain 'maxChainDepth' reached`);
-    maxChainDepthErr.adChain = adChain;
-    return Promise.reject(maxChainDepthErr);
+function vastWrapperChainError(adChain) {
+  const maxChainDepthErr = new Error(`VastWrapperChain 'maxChainDepth' reached`);
+  maxChainDepthErr.adChain = adChain;
+  return maxChainDepthErr;
+}
+
+function validateChainDepth(adChain, maxChainDepth) {
+  if(adChain.length >= maxChainDepth) {
+    return Promise.reject(vastWrapperChainError(adChain));  
   }
 
-  return fetchAd(config.adTag, config)
+  return Promise.resolve()
+}
+
+function vastWrapperChain (fetchAd, config, adChain=[]) {
+  return validateChainDepth(adChain, config.maxChainDepth)
+    .then(() => fetchAd(config.adTag, config))
     .then((vastAdObj) => {
       const newAdChain = [...adChain, vastAdObj];
 
