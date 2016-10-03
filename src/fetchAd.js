@@ -16,5 +16,5 @@ export default function (masterAdTag, config={}) {
       promisify((cb) => 
         parseString(res.text(), parseStrDefaults, cb)
       )
-    )
+    );
 };
