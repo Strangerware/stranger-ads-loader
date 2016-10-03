@@ -13,7 +13,7 @@ function validateChainDepth(adChain, maxChainDepth) {
     return Promise.reject(vastWrapperChainError(adChain));  
   }
 
-  return Promise.resolve()
+  return Promise.resolve();
 }
 
 function vastWrapperChain (fetchAd, config, adChain=[]) {
